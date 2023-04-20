@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ООП_4.ShapesClasses;
 
 namespace ООП_4
 {

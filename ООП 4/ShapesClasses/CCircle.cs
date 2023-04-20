@@ -17,8 +17,6 @@ namespace ООП_4
             g = graphics;
             this.Colored = Colored;
         }
-
-
         override public void Draw() 
         {
             Pen pen = new Pen(Color.Brown);
@@ -34,13 +32,8 @@ namespace ООП_4
                 pen.Color = Color.Purple;
             pen.Width = 4;
             g.DrawEllipse(pen, p.X - R / 2, p.Y - R / 2, R, R);
-            if (selected)
-            {
-                pen.Width = 2;
-                pen.Color = Color.Black;
-                pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-                g.DrawRectangle(pen, p.X - (R+8) / 2, p.Y - (R + 8) / 2, R+ 8, R + 8);
-            }
         }
+
+
     }
 }

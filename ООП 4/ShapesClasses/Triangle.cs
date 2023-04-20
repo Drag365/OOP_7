@@ -10,14 +10,13 @@ namespace ООП_4.ShapesClasses
 {
     public class Triangle : Shape
     {
+
         public Triangle(Point click, Graphics graphics, string Colored)
         {
             p = click;
             g = graphics;
             this.Colored = Colored;
         }
-
-
         override public void Draw()
         {
             Pen pen = new Pen(Color.Brown);
@@ -36,20 +35,12 @@ namespace ООП_4.ShapesClasses
             Point[] vertices = new Point[3];
             for (int i = 0; i < 3; i++)
             {
-                double x = p.X + (R * Math.Cos(angle)) / 1.5;
-                double y = p.Y + (R * Math.Sin(angle)) / 1.5;
+                double x = p.X + (R * Math.Cos(angle)) / 1.6;
+                double y = p.Y + (R * Math.Sin(angle) + 9) / 1.7;
                 vertices[i] = new Point((int)x, (int)y);
                 angle += 2 * Math.PI / 3;
             }
             g.DrawPolygon(pen, vertices);
-            if (selected)
-            {
-                pen.Width = 2;
-                pen.Color = Color.Black;
-                pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-                g.DrawRectangle(pen, p.X - (R + 16) / 2, p.Y - (R + 26) / 2, (R + 16), R + 12);
-
-            }
         }
     }
 }

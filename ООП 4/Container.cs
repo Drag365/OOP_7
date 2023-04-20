@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using Laba4OOP.src;
 using System.Security.Cryptography.X509Certificates;
+using ООП_4.ShapesClasses;
 
 namespace ООП_4
 {
@@ -14,6 +15,7 @@ namespace ООП_4
         private List<Shape> shapes;
         public bool ctrlPressed = false;
         public bool selectMany = false;
+        public Decorator decorator;
         public Container()
         {
             shapes = new List<Shape>();
@@ -27,23 +29,36 @@ namespace ООП_4
 
         public void unSelectAll()
         {
-            foreach (Shape shape in shapes)
+            int i = 0;
+            for (; i < shapes.Count;)
             {
-                shape.unSelect();
+                if (shapes[i] is Decorator decorator)
+                {
+                    if (decorator.shape is Shape shape)
+                    {
+                        shapes[i] = shape;
+                    }
+                }
+                i++;
             }
         }
         public bool isSelect(Point point)
         {
+            int i = 0;
             bool res = false;
-            foreach (Shape shape in shapes)
+            for (; i < shapes.Count;)
             {
-                if (shape.getSelect() == false && shape.checkPointPosition(point) == true)
+                if (shapes[i] is Decorator == false && shapes[i].checkPointPosition(point) == true)
                 {
-                    shape.changeSelect();
+                    decorator = new Decorator(shapes[i]);
+                    shapes.Add(decorator);
+                    shapes.RemoveAt(i);
                     res = true;
                     if (selectMany == false)
                         return res;
+                    continue;
                 }
+                i++;
             }
             return res;
         }
@@ -52,7 +67,7 @@ namespace ООП_4
             int i = 0;
             for (; i < shapes.Count;)
             {
-                if (shapes[i].getSelect() == true)
+                if (shapes[i] is Decorator == true)
                 {
                     shapes.RemoveAt(i);
                     continue;
@@ -74,8 +89,9 @@ namespace ООП_4
             if (isSelect(shape.getPosition())) { return; }
             if (ctrlPressed == false)
             {
-                shape.changeSelect();
-                shapes.Add(shape);
+                decorator = new Decorator(shape);
+                shapes.Add(decorator);
+                shapes.Remove(shape);
             }
         }
 
@@ -84,7 +100,7 @@ namespace ООП_4
 
             foreach (Shape shape in shapes)
             {
-                if (shape.getSelect() == true)
+                if (shape is Decorator == true)
                 {
                     if (shape.getPosition().X + shape.getRadius() / 2 + x < width &&
                         shape.getPosition().X - shape.getRadius() / 2 + x > 0 &&
@@ -96,7 +112,7 @@ namespace ООП_4
             }
             foreach (Shape shape in shapes)
             {
-                if (shape.getSelect() == true)
+                if (shape is Decorator == true)
                 {
                     shape.move(x, y);
                 }
@@ -106,22 +122,9 @@ namespace ООП_4
 
         public void upSizeShape(int s, int width, int height)
         {
-
             foreach (Shape shape in shapes)
             {
-                if (shape.getSelect() == true)
-                {
-                    if (shape.getPosition().X + shape.getRadius() / 2 + s < width &&
-                        shape.getPosition().X - shape.getRadius() / 2 + s > 0 &&
-                        shape.getPosition().Y + shape.getRadius() / 2 + s < height &&
-                        shape.getPosition().Y - shape.getRadius() / 2 + s > 0)
-                        continue;
-                    else return;
-                }
-            }
-            foreach (Shape shape in shapes)
-            {
-                if (shape.getSelect() == true)
+                if (shape is Decorator == true)
                 {
                     shape.upSize(s);
                 }
@@ -132,7 +135,7 @@ namespace ООП_4
         {
             foreach (Shape shape in shapes)
             {
-                if (shape.getSelect() == true)
+                if (shape is Decorator == true)
                 {
                     shape.upSize(s);
                 }
@@ -142,7 +145,7 @@ namespace ООП_4
         {
             foreach (Shape shape in shapes)
             {
-                if (shape.getSelect() == true)
+                if (shape is Decorator == true)
                 {
                     shape.changeColor(Color);
                     
