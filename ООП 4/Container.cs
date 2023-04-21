@@ -27,6 +27,50 @@ namespace ООП_4
                 shape.Draw();
         }
 
+        public void Compose(CGroup group)
+        {
+            int i = 0;
+            for (; i < shapes.Count;)
+            {
+                if (shapes[i] is Decorator decorator)
+                {
+                    if (decorator.shape is Shape shape)
+                    {
+                        group.addShape(shape);
+                        shapes.RemoveAt(i);
+                        continue;
+                    }
+                }
+                i++;
+            }
+            decorator = new Decorator(group);
+            shapes.Add(decorator);
+        }
+
+        public void unCompose()
+        {
+            int i = 0;
+            int j = shapes.Count;
+            for (; i < j;)
+            {
+                if (shapes[i] is Decorator decorator)
+                {
+                    if (decorator.shape is CGroup group)
+                    {
+                        foreach (Shape innerShape in group.getShapes())
+                        {
+                            Decorator dec = new Decorator(innerShape);
+                            shapes.Add(dec);
+                        }
+                        j--;
+                        shapes.RemoveAt(i);
+                        continue;
+                    }
+                }
+                i++;
+            }
+        }
+
         public void unSelectAll()
         {
             int i = 0;
@@ -82,7 +126,7 @@ namespace ООП_4
                     shapes.RemoveAt(i);
             }
         }
-        public void AddOrSelectShape(Shape shape)
+        virtual public void AddOrSelectShape(Shape shape)
         {
             if (ctrlPressed == false)
                 unSelectAll();
@@ -95,17 +139,20 @@ namespace ООП_4
             }
         }
 
-        public void moveShape(int x, int y, int width, int height)
+        public void Add(Shape shape)
+        {
+                shapes.Add(shape);
+            
+        }
+
+        public void Move(int x, int y, int width, int height)
         {
 
             foreach (Shape shape in shapes)
             {
                 if (shape is Decorator == true)
                 {
-                    if (shape.getPosition().X + shape.getRadius() / 2 + x < width &&
-                        shape.getPosition().X - shape.getRadius() / 2 + x > 0 &&
-                        shape.getPosition().Y + shape.getRadius() / 2 + y < height &&
-                        shape.getPosition().Y - shape.getRadius() / 2 + y > 0)
+                    if (shape.canMove(x, y, width, height) == true)
                         continue;
                     else return;
                 }
@@ -120,19 +167,18 @@ namespace ООП_4
             
         }
 
-        public void upSizeShape(int s, int width, int height)
+        public void upSize(int s, int width, int height)
         {
-            foreach (Shape shape in shapes)
-            {
-                if (shape is Decorator == true)
-                {
-                    shape.upSize(s);
-                }
-            }
-        }
 
-        public void downSizeShape(int s, int width, int height)
-        {
+            foreach (Shape shape in shapes)
+            {
+                if (shape is Decorator == true)
+                {
+                    if (shape.canMove(s, s, width, height) == true && shape.canMove(-s, -s, width, height) == true)
+                        continue;
+                    else return;
+                }
+            }
             foreach (Shape shape in shapes)
             {
                 if (shape is Decorator == true)
@@ -141,14 +187,14 @@ namespace ООП_4
                 }
             }
         }
-        public void changeColorShape(string Color)
+        override public void changeColor(string Color)
         {
             foreach (Shape shape in shapes)
             {
                 if (shape is Decorator == true)
                 {
                     shape.changeColor(Color);
-                    
+
                 }
             }
         }

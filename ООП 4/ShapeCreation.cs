@@ -21,6 +21,11 @@ namespace ООП_4
             return new CCIrcle(click, g, Colored);
         }
 
+        public CGroup createCGroup()
+        {
+            return new CGroup(g);
+        }
+
         public Square createSquare(Point click, string Colored)
         {
             return new Square(click, g, Colored);

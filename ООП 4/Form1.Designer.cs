@@ -46,6 +46,8 @@ namespace ООП_4
             this.PurpleOption = new System.Windows.Forms.ToolStripMenuItem();
             this.BrownOption = new System.Windows.Forms.ToolStripMenuItem();
             this.BlueOption = new System.Windows.Forms.ToolStripMenuItem();
+            this.Compose = new System.Windows.Forms.Button();
+            this.uncompose_B = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paintField)).BeginInit();
             this.panel2.SuspendLayout();
@@ -66,7 +68,7 @@ namespace ООП_4
             // 
             // deleteAll
             // 
-            this.deleteAll.Location = new System.Drawing.Point(308, 392);
+            this.deleteAll.Location = new System.Drawing.Point(394, 393);
             this.deleteAll.Name = "deleteAll";
             this.deleteAll.Size = new System.Drawing.Size(186, 29);
             this.deleteAll.TabIndex = 1;
@@ -145,21 +147,21 @@ namespace ООП_4
             // кругToolStripMenuItem
             // 
             this.кругToolStripMenuItem.Name = "кругToolStripMenuItem";
-            this.кругToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.кругToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.кругToolStripMenuItem.Text = "Круг";
             this.кругToolStripMenuItem.Click += new System.EventHandler(this.кругToolStripMenuItem_Click);
             // 
             // квадратToolStripMenuItem
             // 
             this.квадратToolStripMenuItem.Name = "квадратToolStripMenuItem";
-            this.квадратToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.квадратToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.квадратToolStripMenuItem.Text = "Квадрат";
             this.квадратToolStripMenuItem.Click += new System.EventHandler(this.квадратToolStripMenuItem_Click);
             // 
             // треугольникToolStripMenuItem
             // 
             this.треугольникToolStripMenuItem.Name = "треугольникToolStripMenuItem";
-            this.треугольникToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.треугольникToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.треугольникToolStripMenuItem.Text = "Треугольник";
             this.треугольникToolStripMenuItem.Click += new System.EventHandler(this.треугольникToolStripMenuItem_Click);
             // 
@@ -183,43 +185,66 @@ namespace ООП_4
             // GreenOption
             // 
             this.GreenOption.Name = "GreenOption";
-            this.GreenOption.Size = new System.Drawing.Size(180, 22);
+            this.GreenOption.Size = new System.Drawing.Size(144, 22);
             this.GreenOption.Text = "Зеленый";
             this.GreenOption.Click += new System.EventHandler(this.GreenOption_Click);
             // 
             // BlackOption
             // 
             this.BlackOption.Name = "BlackOption";
-            this.BlackOption.Size = new System.Drawing.Size(180, 22);
+            this.BlackOption.Size = new System.Drawing.Size(144, 22);
             this.BlackOption.Text = "Черный";
             this.BlackOption.Click += new System.EventHandler(this.BlackOption_Click);
             // 
             // PurpleOption
             // 
             this.PurpleOption.Name = "PurpleOption";
-            this.PurpleOption.Size = new System.Drawing.Size(180, 22);
+            this.PurpleOption.Size = new System.Drawing.Size(144, 22);
             this.PurpleOption.Text = "Фиолетовый";
             this.PurpleOption.Click += new System.EventHandler(this.PurpleOption_Click);
             // 
             // BrownOption
             // 
             this.BrownOption.Name = "BrownOption";
-            this.BrownOption.Size = new System.Drawing.Size(180, 22);
+            this.BrownOption.Size = new System.Drawing.Size(144, 22);
             this.BrownOption.Text = "Красный";
             this.BrownOption.Click += new System.EventHandler(this.BrownOption_Click);
             // 
             // BlueOption
             // 
             this.BlueOption.Name = "BlueOption";
-            this.BlueOption.Size = new System.Drawing.Size(180, 22);
+            this.BlueOption.Size = new System.Drawing.Size(144, 22);
             this.BlueOption.Text = "Синий";
             this.BlueOption.Click += new System.EventHandler(this.BlueOption_Click);
+            // 
+            // Compose
+            // 
+            this.Compose.Location = new System.Drawing.Point(182, 393);
+            this.Compose.Name = "Compose";
+            this.Compose.Size = new System.Drawing.Size(188, 29);
+            this.Compose.TabIndex = 5;
+            this.Compose.Text = "Объединить";
+            this.Compose.UseVisualStyleBackColor = true;
+            this.Compose.Click += new System.EventHandler(this.Compose_Click);
+            // 
+            // uncompose_B
+            // 
+            this.uncompose_B.Location = new System.Drawing.Point(12, 395);
+            this.uncompose_B.Name = "uncompose_B";
+            this.uncompose_B.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.uncompose_B.Size = new System.Drawing.Size(164, 27);
+            this.uncompose_B.TabIndex = 6;
+            this.uncompose_B.Text = "Расформировать";
+            this.uncompose_B.UseVisualStyleBackColor = true;
+            this.uncompose_B.Click += new System.EventHandler(this.uncompose_B_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.uncompose_B);
+            this.Controls.Add(this.Compose);
             this.Controls.Add(this.selectAll);
             this.Controls.Add(this.deleteAll);
             this.Controls.Add(this.CtrlCheck);
@@ -261,6 +286,8 @@ namespace ООП_4
         private System.Windows.Forms.ToolStripMenuItem PurpleOption;
         private System.Windows.Forms.ToolStripMenuItem BrownOption;
         private System.Windows.Forms.ToolStripMenuItem BlueOption;
+        private System.Windows.Forms.Button Compose;
+        private System.Windows.Forms.Button uncompose_B;
     }
 }
 

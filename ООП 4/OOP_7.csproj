@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CGroup.cs" />
     <Compile Include="ShapesClasses\CCircle.cs" />
     <Compile Include="ShapeCreation.cs" />
     <Compile Include="ShapesClasses\Decorator.cs" />

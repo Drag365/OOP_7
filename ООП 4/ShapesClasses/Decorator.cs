@@ -11,21 +11,46 @@ namespace ООП_4.ShapesClasses
     public class Decorator : Shape
     {
         public Shape shape;
+        private Graphics g;
         public Decorator(Shape shape)
         {
+            g = shape.getG();
             this.shape = shape;
 
         }
         override public void Draw()
         {
-            shape.Draw();
-
             Pen pen = new Pen(Color.Black);
             pen.Width = 2;
             pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            shape.g.DrawRectangle(pen, shape.getPosition().X - (shape.getRadius() + 8) / 2, shape.getPosition().Y - (shape.getRadius() + 8) / 2, shape.getRadius() + 8, shape.getRadius() + 8);
-        }
+            if (shape is CGroup group)
+            {
+                foreach (Shape innerShape in group.getShapes())
+                {
+                    // Создаем новый экземпляр декоратора для каждого объекта в группе.
+                    Decorator decorator = new Decorator(innerShape);
+                    decorator.Draw();
+                }
+            }
+            else
+            {
+                g.DrawRectangle(pen, shape.getPosition().X - (shape.getRadius() + 8) / 2, shape.getPosition().Y - (shape.getRadius() + 8) / 2, shape.getRadius() + 8, shape.getRadius() + 8);
+                shape.Draw();
+            }
+         }
 
+        override public bool canMove(int x, int y, int width, int height)
+        {
+            if (shape is CGroup group)
+                return group.canMove(x, y, width, height);
+            else if (shape.getPosition().X + shape.getRadius() / 2 + x < width &&
+                shape.getPosition().X - shape.getRadius() / 2 + x > 0 &&
+                shape.getPosition().Y + shape.getRadius() / 2 + y < height &&
+                shape.getPosition().Y - shape.getRadius() / 2 + y > 0)
+                return true;
+            else
+                return false;
+        }
         override public bool checkPointPosition(Point point)
         {
             return shape.checkPointPosition(point);

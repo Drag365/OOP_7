@@ -63,29 +63,29 @@ namespace ООП_4
             if (e.KeyCode == Keys.A)
             {
                 
-                container.moveShape(-5, 0, panel1.Width, panel1.Height);
+                container.Move(-5, 0, panel1.Width, panel1.Height);
             }
             if (e.KeyCode == Keys.S)
             {
-                container.moveShape(0, 5, panel1.Width, panel1.Height);
+                container.Move(0, 5, panel1.Width, panel1.Height);
             }
             if (e.KeyCode == Keys.D)
             {
-                container.moveShape(5, 0, panel1.Width, panel1.Height);
+                container.Move(5, 0, panel1.Width, panel1.Height);
             }
             if (e.KeyCode == Keys.W)
             {
-                container.moveShape(0, -5, panel1.Width, panel1.Height);
+                container.Move(0, -5, panel1.Width, panel1.Height);
             }
 
             if (e.KeyCode == Keys.E)
             {
-                container.upSizeShape(1, panel1.Width, panel1.Height);
+                container.upSize(1, panel1.Width, panel1.Height);
             }
 
             if (e.KeyCode == Keys.Q)
             {
-                container.downSizeShape(-1, panel1.Width, panel1.Height);
+                container.upSize(-1, panel1.Width, panel1.Height);
             }
         }
 
@@ -149,32 +149,43 @@ namespace ООП_4
 
         private void GreenOption_Click(object sender, EventArgs e)
         {
-            container.changeColorShape("Green");
+            container.changeColor("Green");
             Colored = "Green";
         }
 
         private void BlackOption_Click(object sender, EventArgs e)
         {
-            container.changeColorShape("Black");
+            container.changeColor("Black");
             Colored = "Black";
         }
 
         private void PurpleOption_Click(object sender, EventArgs e)
         {
-            container.changeColorShape("Purple");
+            container.changeColor("Purple");
             Colored = "Purple";
         }
 
         private void BrownOption_Click(object sender, EventArgs e)
         {
-            container.changeColorShape("Brown");
+            container.changeColor("Brown");
             Colored = "Brown";
         }
 
         private void BlueOption_Click(object sender, EventArgs e)
         {
-            container.changeColorShape("Blue");
+            container.changeColor("Blue");
             Colored = "Blue";
+        }
+
+        private void Compose_Click(object sender, EventArgs e)
+        {
+            
+            container.Compose(Creation.createCGroup());
+        }
+
+        private void uncompose_B_Click(object sender, EventArgs e)
+        {
+            container.unCompose();
         }
     }
     

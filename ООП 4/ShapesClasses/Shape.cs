@@ -24,6 +24,21 @@ namespace Laba4OOP.src
             return false;
         }
 
+        virtual public Graphics getG()
+        {
+            return g;
+        }
+
+        virtual public bool canMove(int x, int y, int width, int height)
+        {
+            if (p.X + R / 2 + x < width &&
+                p.X - R / 2 + x > 0 &&
+                p.Y + R / 2 + y < height &&
+                p.Y - R / 2 + y > 0)
+                return true;
+            else
+                return false;
+        }
         virtual public Point getPosition()
         {
             return p;
@@ -49,5 +64,7 @@ namespace Laba4OOP.src
         {
             Colored = Color;
         }
+
+        ~Shape() { }
     }
 }
