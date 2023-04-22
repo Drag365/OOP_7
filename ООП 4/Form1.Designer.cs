@@ -1,4 +1,6 @@
 ﻿
+using System.Windows.Forms;
+
 namespace ООП_4
 {
     partial class Form1
@@ -137,7 +139,6 @@ namespace ООП_4
             this.toolStrip1.Size = new System.Drawing.Size(378, 57);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.UseWaitCursor = true;
             // 
             // saveButton
             // 
@@ -211,6 +212,7 @@ namespace ООП_4
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
             this.toolStripDropDownButton2.Size = new System.Drawing.Size(63, 54);
             this.toolStripDropDownButton2.Text = "toolStripDropDownButton2";
+            
             // 
             // GreenOption
             // 
@@ -291,6 +293,7 @@ namespace ООП_4
             this.panel2.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.toolStrip1.Refresh();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ООП_4.Factory;
 using ООП_4.ShapesClasses;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ООП_4
 {
@@ -30,6 +31,7 @@ namespace ООП_4
             InitializeComponent();
             map = new Bitmap(paintField.Width, paintField.Height);// определяем битмап
             Creation = new ShapeCreation(Graphics.FromImage(map));// определяем конвеер кругов
+            
         }
 
         protected void paintField_Paint(object sender, PaintEventArgs e)// функция отрисовки кругов
@@ -37,6 +39,7 @@ namespace ООП_4
             Graphics.FromImage(map).Clear(Color.LightGray);
             container.Draw();
             paintField.Image = map;
+            toolStrip1.Refresh();
         }
 
         private void paintField_MouseClick(object sender, MouseEventArgs e)//функция нажатия мышкой для добавления на поле круга или его выделения
@@ -130,18 +133,21 @@ namespace ООП_4
         {
             typeOfShape = 0;
             toolStripDropDownButton1.Image = global::ООП_4.Properties.Resources.Circle;
+            toolStrip1.Refresh();
         }
 
         private void квадратToolStripMenuItem_Click(object sender, EventArgs e)
         {
             typeOfShape = 1;
             toolStripDropDownButton1.Image = global::ООП_4.Properties.Resources.Square;
+            toolStrip1.Refresh();
         }
 
         private void треугольникToolStripMenuItem_Click(object sender, EventArgs e)
         {
             typeOfShape = 2;
             toolStripDropDownButton1.Image = global::ООП_4.Properties.Resources.Triangle;
+            toolStrip1.Refresh();
         }
 
         private void GreenOption_Click(object sender, EventArgs e)
