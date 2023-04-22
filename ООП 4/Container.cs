@@ -7,11 +7,16 @@ using System.Drawing;
 using Laba4OOP.src;
 using System.Security.Cryptography.X509Certificates;
 using ООП_4.ShapesClasses;
+using System.IO;
+using System.Security.Cryptography;
+using ООП_4.Factory;
 
 namespace ООП_4
 {
     class Container : Shape
     {
+        const string filename = "D:/data.txt";
+        StreamWriter stream = null;
         private List<Shape> shapes;
         public bool ctrlPressed = false;
         public bool selectMany = false;
@@ -27,6 +32,34 @@ namespace ООП_4
                 shape.Draw();
         }
 
+        public void Save()
+        {
+            try
+            {
+                stream = new StreamWriter(filename);
+                stream.WriteLine("{0}", shapes.Count);
+
+                foreach (Shape shape in shapes)
+                {
+                    shape.Save(stream);
+                }
+                
+
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                }
+            }
+        }
+
+        public void Load(CShapeArray array)
+        {
+            array.LoadShapes(filename);
+            shapes = array.getList();
+        }
         public void Compose(CGroup group)
         {
             int i = 0;
@@ -187,7 +220,7 @@ namespace ООП_4
                 }
             }
         }
-        override public void changeColor(string Color)
+        override public void changeColor(char Color)
         {
             foreach (Shape shape in shapes)
             {

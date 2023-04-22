@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,16 @@ namespace ООП_4.ShapesClasses
             this.shape = shape;
 
         }
+
+        public override void Save(StreamWriter stream)
+        {
+            shape.Save(stream);
+        }
+
+        public override void Load(StreamReader stream)
+        {
+            shape.Load(stream); 
+        }
         override public void Draw()
         {
             Pen pen = new Pen(Color.Black);
@@ -27,7 +38,6 @@ namespace ООП_4.ShapesClasses
             {
                 foreach (Shape innerShape in group.getShapes())
                 {
-                    // Создаем новый экземпляр декоратора для каждого объекта в группе.
                     Decorator decorator = new Decorator(innerShape);
                     decorator.Draw();
                 }
@@ -76,7 +86,7 @@ namespace ООП_4.ShapesClasses
             shape.upSize(s);
         }
 
-        override public void changeColor(string Color)
+        override public void changeColor(char Color)
         {
             shape.changeColor(Color);
         }

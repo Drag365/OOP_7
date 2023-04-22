@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ООП_4.Factory;
 using ООП_4.ShapesClasses;
 
 namespace ООП_4
@@ -15,19 +17,20 @@ namespace ООП_4
     public partial class Form1 : Form
     {
         Container container = new Container();// создаем контейнер хранящий круги
-        Graphics g;// создаем объект графики
+        public Graphics g;// создаем объект графики
         ShapeCreation Creation;// создаем объект-конвеер кругов
         Bitmap map;// создаем битмап "мап"
         Boolean ctrlpress = false;// флажок зажатия контрола
         int typeOfShape = 0;
-        string Colored = "Blue";
+        char Colored = 'B';
+        const string filename = "D:/data.txt";
+
         public Form1()
         {
             InitializeComponent();
             map = new Bitmap(paintField.Width, paintField.Height);// определяем битмап
             Creation = new ShapeCreation(Graphics.FromImage(map));// определяем конвеер кругов
         }
-
 
         protected void paintField_Paint(object sender, PaintEventArgs e)// функция отрисовки кругов
         {
@@ -87,12 +90,16 @@ namespace ООП_4
             {
                 container.upSize(-1, panel1.Width, panel1.Height);
             }
+            if (e.KeyCode == Keys.G)
+            {
+                container.Compose(Creation.createCGroup());
+            }
+            if (e.KeyCode == Keys.R)
+            {
+                container.unCompose();
+            }
         }
 
-        public int width()
-        {
-            return panel1.Width;
-        }
         private void CtrlCheck_CheckedChanged(object sender, EventArgs e)//если мы выделели чекбокс "контрол зажат", то меняем значение флажка 
         {
             container.ctrlPressed = !container.ctrlPressed;
@@ -119,11 +126,6 @@ namespace ООП_4
             container.selectMany = !container.selectMany;
         }
 
-        private void paintField_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void кругToolStripMenuItem_Click(object sender, EventArgs e)
         {
             typeOfShape = 0;
@@ -142,48 +144,53 @@ namespace ООП_4
             toolStripDropDownButton1.Image = global::ООП_4.Properties.Resources.Triangle;
         }
 
-        private void toolStripDropDownButton2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void GreenOption_Click(object sender, EventArgs e)
         {
-            container.changeColor("Green");
-            Colored = "Green";
+            container.changeColor('G');
+            Colored = 'G';
         }
 
         private void BlackOption_Click(object sender, EventArgs e)
         {
-            container.changeColor("Black");
-            Colored = "Black";
+            container.changeColor('B');
+            Colored = 'B';
         }
 
         private void PurpleOption_Click(object sender, EventArgs e)
         {
-            container.changeColor("Purple");
-            Colored = "Purple";
+            container.changeColor('P');
+            Colored = 'P';
         }
 
         private void BrownOption_Click(object sender, EventArgs e)
         {
-            container.changeColor("Brown");
-            Colored = "Brown";
+            container.changeColor('R');
+            Colored = 'R';
         }
 
         private void BlueOption_Click(object sender, EventArgs e)
         {
-            container.changeColor("Blue");
-            Colored = "Blue";
+            container.changeColor('V');
+            Colored = 'V';
         }
 
-        private void Compose_Click(object sender, EventArgs e)
+        private void saveButton_Click(object sender, EventArgs e)
         {
-            
+            container.Save();
+        }
+
+        private void loadButton_Click(object sender, EventArgs e)
+        {
+            CShapeArray array = new CShapeArray(Graphics.FromImage(map));
+            container.Load(array);
+        }
+
+        private void groupButton_Click(object sender, EventArgs e)
+        {
             container.Compose(Creation.createCGroup());
         }
 
-        private void uncompose_B_Click(object sender, EventArgs e)
+        private void unGroupButton_Click(object sender, EventArgs e)
         {
             container.unCompose();
         }

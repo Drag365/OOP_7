@@ -36,6 +36,8 @@ namespace ООП_4
             this.paintField = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.saveButton = new System.Windows.Forms.ToolStripButton();
+            this.loadButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.кругToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.квадратToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,8 +48,8 @@ namespace ООП_4
             this.PurpleOption = new System.Windows.Forms.ToolStripMenuItem();
             this.BrownOption = new System.Windows.Forms.ToolStripMenuItem();
             this.BlueOption = new System.Windows.Forms.ToolStripMenuItem();
-            this.Compose = new System.Windows.Forms.Button();
-            this.uncompose_B = new System.Windows.Forms.Button();
+            this.groupButton = new System.Windows.Forms.ToolStripButton();
+            this.unGroupButton = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paintField)).BeginInit();
             this.panel2.SuspendLayout();
@@ -57,7 +59,7 @@ namespace ООП_4
             // CtrlCheck
             // 
             this.CtrlCheck.AutoSize = true;
-            this.CtrlCheck.Location = new System.Drawing.Point(601, 399);
+            this.CtrlCheck.Location = new System.Drawing.Point(601, 12);
             this.CtrlCheck.Name = "CtrlCheck";
             this.CtrlCheck.Size = new System.Drawing.Size(75, 17);
             this.CtrlCheck.TabIndex = 0;
@@ -68,7 +70,7 @@ namespace ООП_4
             // 
             // deleteAll
             // 
-            this.deleteAll.Location = new System.Drawing.Point(394, 393);
+            this.deleteAll.Location = new System.Drawing.Point(296, 392);
             this.deleteAll.Name = "deleteAll";
             this.deleteAll.Size = new System.Drawing.Size(186, 29);
             this.deleteAll.TabIndex = 1;
@@ -80,7 +82,7 @@ namespace ООП_4
             // selectAll
             // 
             this.selectAll.AutoSize = true;
-            this.selectAll.Location = new System.Drawing.Point(601, 422);
+            this.selectAll.Location = new System.Drawing.Point(601, 39);
             this.selectAll.Name = "selectAll";
             this.selectAll.Size = new System.Drawing.Size(178, 17);
             this.selectAll.TabIndex = 2;
@@ -93,9 +95,9 @@ namespace ООП_4
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.paintField);
-            this.panel1.Location = new System.Drawing.Point(160, 5);
+            this.panel1.Location = new System.Drawing.Point(12, 62);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(617, 381);
+            this.panel1.Size = new System.Drawing.Size(776, 324);
             this.panel1.TabIndex = 3;
             // 
             // paintField
@@ -104,31 +106,60 @@ namespace ООП_4
             this.paintField.Dock = System.Windows.Forms.DockStyle.Fill;
             this.paintField.Location = new System.Drawing.Point(0, 0);
             this.paintField.Name = "paintField";
-            this.paintField.Size = new System.Drawing.Size(615, 379);
+            this.paintField.Size = new System.Drawing.Size(774, 322);
             this.paintField.TabIndex = 0;
             this.paintField.TabStop = false;
-            this.paintField.Click += new System.EventHandler(this.paintField_Click);
             this.paintField.Paint += new System.Windows.Forms.PaintEventHandler(this.paintField_Paint);
             this.paintField.MouseClick += new System.Windows.Forms.MouseEventHandler(this.paintField_MouseClick);
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.toolStrip1);
-            this.panel2.Location = new System.Drawing.Point(4, 6);
+            this.panel2.Location = new System.Drawing.Point(8, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(168, 380);
+            this.panel2.Size = new System.Drawing.Size(378, 64);
             this.panel2.TabIndex = 4;
             // 
             // toolStrip1
             // 
+            this.toolStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveButton,
+            this.loadButton,
             this.toolStripDropDownButton1,
-            this.toolStripDropDownButton2});
+            this.toolStripDropDownButton2,
+            this.groupButton,
+            this.unGroupButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(168, 57);
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip1.Size = new System.Drawing.Size(378, 57);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.UseWaitCursor = true;
+            // 
+            // saveButton
+            // 
+            this.saveButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.saveButton.Image = global::ООП_4.Properties.Resources.Сохранить;
+            this.saveButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.saveButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(54, 54);
+            this.saveButton.Text = "toolStripButton1";
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // loadButton
+            // 
+            this.loadButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.loadButton.Image = global::ООП_4.Properties.Resources.Загрузить;
+            this.loadButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.loadButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.loadButton.Name = "loadButton";
+            this.loadButton.Size = new System.Drawing.Size(54, 54);
+            this.loadButton.Text = "toolStripButton2";
+            this.loadButton.Click += new System.EventHandler(this.loadButton_Click);
             // 
             // toolStripDropDownButton1
             // 
@@ -180,7 +211,6 @@ namespace ООП_4
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
             this.toolStripDropDownButton2.Size = new System.Drawing.Size(63, 54);
             this.toolStripDropDownButton2.Text = "toolStripDropDownButton2";
-            this.toolStripDropDownButton2.Click += new System.EventHandler(this.toolStripDropDownButton2_Click);
             // 
             // GreenOption
             // 
@@ -217,34 +247,33 @@ namespace ООП_4
             this.BlueOption.Text = "Синий";
             this.BlueOption.Click += new System.EventHandler(this.BlueOption_Click);
             // 
-            // Compose
+            // groupButton
             // 
-            this.Compose.Location = new System.Drawing.Point(182, 393);
-            this.Compose.Name = "Compose";
-            this.Compose.Size = new System.Drawing.Size(188, 29);
-            this.Compose.TabIndex = 5;
-            this.Compose.Text = "Объединить";
-            this.Compose.UseVisualStyleBackColor = true;
-            this.Compose.Click += new System.EventHandler(this.Compose_Click);
+            this.groupButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.groupButton.Image = global::ООП_4.Properties.Resources.Сгруппировать;
+            this.groupButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.groupButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.groupButton.Name = "groupButton";
+            this.groupButton.Size = new System.Drawing.Size(54, 54);
+            this.groupButton.Text = "toolStripButton3";
+            this.groupButton.Click += new System.EventHandler(this.groupButton_Click);
             // 
-            // uncompose_B
+            // unGroupButton
             // 
-            this.uncompose_B.Location = new System.Drawing.Point(12, 395);
-            this.uncompose_B.Name = "uncompose_B";
-            this.uncompose_B.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.uncompose_B.Size = new System.Drawing.Size(164, 27);
-            this.uncompose_B.TabIndex = 6;
-            this.uncompose_B.Text = "Расформировать";
-            this.uncompose_B.UseVisualStyleBackColor = true;
-            this.uncompose_B.Click += new System.EventHandler(this.uncompose_B_Click);
+            this.unGroupButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.unGroupButton.Image = global::ООП_4.Properties.Resources.Разгруппировать;
+            this.unGroupButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.unGroupButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.unGroupButton.Name = "unGroupButton";
+            this.unGroupButton.Size = new System.Drawing.Size(54, 54);
+            this.unGroupButton.Text = "toolStripButton4";
+            this.unGroupButton.Click += new System.EventHandler(this.unGroupButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.uncompose_B);
-            this.Controls.Add(this.Compose);
             this.Controls.Add(this.selectAll);
             this.Controls.Add(this.deleteAll);
             this.Controls.Add(this.CtrlCheck);
@@ -286,8 +315,10 @@ namespace ООП_4
         private System.Windows.Forms.ToolStripMenuItem PurpleOption;
         private System.Windows.Forms.ToolStripMenuItem BrownOption;
         private System.Windows.Forms.ToolStripMenuItem BlueOption;
-        private System.Windows.Forms.Button Compose;
-        private System.Windows.Forms.Button uncompose_B;
+        private System.Windows.Forms.ToolStripButton saveButton;
+        private System.Windows.Forms.ToolStripButton loadButton;
+        private System.Windows.Forms.ToolStripButton groupButton;
+        private System.Windows.Forms.ToolStripButton unGroupButton;
     }
 }
 

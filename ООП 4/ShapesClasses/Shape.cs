@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,18 @@ namespace Laba4OOP.src
         public Graphics g;
         protected Point p;
         protected int R = 40;
-        protected string Colored = "Blue";
+        protected char Colored = 'B';
         abstract public void Draw();
+
+        virtual public void Save(StreamWriter stream)
+        {
+            return;
+        }
+
+        virtual public void Load(StreamReader stream)
+        {
+            return;
+        }
         virtual public bool checkPointPosition(Point point)
         {
             double len = Math.Sqrt(Math.Pow(point.X - p.X, 2) + Math.Pow(point.Y - p.Y, 2));
@@ -60,7 +71,7 @@ namespace Laba4OOP.src
             R += s;
         }
 
-        virtual public void changeColor(string Color)
+        virtual public void changeColor(char Color)
         {
             Colored = Color;
         }

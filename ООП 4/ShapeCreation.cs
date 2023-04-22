@@ -16,7 +16,7 @@ namespace ООП_4
             g = graphics;
         }
 
-        public CCIrcle createCCircle(Point click, string Colored)
+        public CCIrcle createCCircle(Point click, char Colored)
         {
             return new CCIrcle(click, g, Colored);
         }
@@ -26,12 +26,12 @@ namespace ООП_4
             return new CGroup(g);
         }
 
-        public Square createSquare(Point click, string Colored)
+        public Square createSquare(Point click, char Colored)
         {
             return new Square(click, g, Colored);
         }
 
-        public Triangle createTriangle(Point click, string Colored)
+        public Triangle createTriangle(Point click, char Colored)
         {
             return new Triangle(click, g, Colored);
         }

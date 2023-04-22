@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,24 +12,38 @@ namespace ООП_4.ShapesClasses
     public class Triangle : Shape
     {
 
-        public Triangle(Point click, Graphics graphics, string Colored)
+        public Triangle(Point click, Graphics graphics, char Colored)
         {
             p = click;
             g = graphics;
             this.Colored = Colored;
         }
+        public override void Save(StreamWriter stream)
+        {
+            stream.WriteLine("T");
+            stream.WriteLine("{0} {1} {2} {3}", p.X, p.Y, R, Colored);
+        }
+
+        public override void Load(StreamReader stream)
+        {
+            string[] values = stream.ReadLine().Split(' ');
+            p.X = int.Parse(values[0]);
+            p.Y = int.Parse(values[1]);
+            R = int.Parse(values[2]);
+            Colored = char.Parse(values[3]);
+        }
         override public void Draw()
         {
             Pen pen = new Pen(Color.Brown);
-            if (Colored == "Blue")
+            if (Colored == 'V')
                 pen.Color = Color.BlueViolet;
-            else if (Colored == "Black")
+            else if (Colored == 'B')
                 pen.Color = Color.Black;
-            else if (Colored == "Red")
+            else if (Colored == 'R')
                 pen.Color = Color.IndianRed;
-            else if (Colored == "Green")
+            else if (Colored == 'G')
                 pen.Color = Color.Green;
-            else if (Colored == "Purple")
+            else if (Colored == 'P')
                 pen.Color = Color.Purple;
             double angle = Math.PI / 6;
             pen.Width = 4;
@@ -44,3 +59,4 @@ namespace ООП_4.ShapesClasses
         }
     }
 }
+

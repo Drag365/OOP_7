@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -18,6 +19,28 @@ namespace ООП_4
         {
             this.g = g;
             shapes = new List<Shape>();
+        }
+        public override void Save(StreamWriter stream)
+        {
+            stream.WriteLine("G");
+            stream.WriteLine("{0}", shapes.Count);
+            foreach (Shape shape in shapes)
+            {
+                shape.Save(stream);
+            }
+        }
+
+        public override void Load(StreamReader stream)
+        {
+            //foreach (Shape shape in shapes)
+            //{
+            //    shape.Save(stream);
+            //}
+            //string[] values = stream.ReadLine().Split(' ');
+            //p.X = int.Parse(values[0]);
+            //p.Y = int.Parse(values[1]);
+            //R = int.Parse(values[2]);
+            //Colored = char.Parse(values[3]);
         }
 
         public List<Shape> getShapes()
@@ -65,7 +88,7 @@ namespace ООП_4
             }
         }
 
-        override public void changeColor(string Color)
+        override public void changeColor(char Color)
         {
             foreach (Shape shape in shapes)
             {

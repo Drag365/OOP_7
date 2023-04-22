@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CGroup.cs" />
+    <Compile Include="Factory\CShapeArray.cs" />
+    <Compile Include="Factory\Factory.cs" />
     <Compile Include="ShapesClasses\CCircle.cs" />
     <Compile Include="ShapeCreation.cs" />
     <Compile Include="ShapesClasses\Decorator.cs" />
@@ -99,6 +101,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Fill.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\Загрузить.png" />
+    <Content Include="Properties\Разгруппировать.png" />
+    <Content Include="Properties\Сгруппировать.png" />
+    <Content Include="Properties\Сохранить.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
