@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Laba4OOP.src;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,13 +26,28 @@ namespace ООП_4
         int typeOfShape = 0;
         char Colored = 'B';
         const string filename = "D:/data.txt";
+        int razWidth;
+        int razHeight;
+        Dictionary<char, Command> commands;
+        Stack<Command> history;
 
         public Form1()
         {
             InitializeComponent();
-            map = new Bitmap(paintField.Width, paintField.Height);// определяем битмап
+            map = new Bitmap(1920, 1080);// определяем битмап
             Creation = new ShapeCreation(Graphics.FromImage(map));// определяем конвеер кругов
             
+            razWidth = this.Width - paintField.Width;
+            razHeight = this.Height - paintField.Height;
+            history = new Stack<Command>();
+            commands = new Dictionary<char, Command>();
+            commands['A'] = new MoveCommand(-10, 0);
+            commands['D'] = new MoveCommand(10, 0);
+            commands['W'] = new MoveCommand(0, -10);
+            commands['S'] = new MoveCommand(0, 10);
+            commands['Q'] = new SizeCommand(-1);
+            commands['E'] = new SizeCommand(1);
+
         }
 
         protected void paintField_Paint(object sender, PaintEventArgs e)// функция отрисовки кругов
@@ -44,13 +60,27 @@ namespace ООП_4
 
         private void paintField_MouseClick(object sender, MouseEventArgs e)//функция нажатия мышкой для добавления на поле круга или его выделения
         {
-            if (typeOfShape == 0) 
-                container.AddOrSelectShape(Creation.createCCircle(e.Location, Colored));
-            else if (typeOfShape == 1)
-                    container.AddOrSelectShape(Creation.createSquare(e.Location, Colored));
-            else if (typeOfShape == 2)
-                container.AddOrSelectShape(Creation.createTriangle(e.Location, Colored));
-            paintField.Invalidate();
+            Command command = new AddCommand(container.getShapes());
+            if (container.CheckPosition(e.Location) == false && ctrlpress == false)
+            {
+                if (typeOfShape == 0)
+                {
+                    command.Execute(Creation.createCCircle(e.Location, Colored));
+
+                }
+                else if (typeOfShape == 1)
+                {
+                    command.Execute(Creation.createSquare(e.Location, Colored));
+                }
+                else if (typeOfShape == 2)
+                {
+                    command.Execute(Creation.createTriangle(e.Location, Colored));
+                }
+            }
+            if (container.CheckPosition(e.Location) == true)
+                container.Select(e.Location);
+            history.Push(command);
+            
         }
 
 
@@ -66,33 +96,20 @@ namespace ООП_4
                 Graphics.FromImage(map).Clear(Color.LightGray);
                 container.delSelected();
             }
-            if (e.KeyCode == Keys.A)
+
+            if (e.KeyCode == Keys.A || e.KeyCode == Keys.S || e.KeyCode == Keys.D || e.KeyCode == Keys.W || e.KeyCode == Keys.E || e.KeyCode == Keys.Q)
             {
-                
-                container.Move(-5, 0, panel1.Width, panel1.Height);
-            }
-            if (e.KeyCode == Keys.S)
-            {
-                container.Move(0, 5, panel1.Width, panel1.Height);
-            }
-            if (e.KeyCode == Keys.D)
-            {
-                container.Move(5, 0, panel1.Width, panel1.Height);
-            }
-            if (e.KeyCode == Keys.W)
-            {
-                container.Move(0, -5, panel1.Width, panel1.Height);
+                char c = Convert.ToChar(e.KeyCode);
+
+                Command command = commands[c];
+                if (command != null)
+                {
+                    Command newcommand = command.Clone();
+                    newcommand.Execute(container);
+                    history.Push(newcommand);
+                }
             }
 
-            if (e.KeyCode == Keys.E)
-            {
-                container.upSize(1, panel1.Width, panel1.Height);
-            }
-
-            if (e.KeyCode == Keys.Q)
-            {
-                container.upSize(-1, panel1.Width, panel1.Height);
-            }
             if (e.KeyCode == Keys.G)
             {
                 container.Compose(Creation.createCGroup());
@@ -100,6 +117,18 @@ namespace ООП_4
             if (e.KeyCode == Keys.R)
             {
                 container.unCompose();
+            }
+
+            if (e.KeyCode == Keys.R)
+            {
+                container.unCompose();
+            }
+
+            if (e.KeyCode == Keys.Z && history.Count > 0)
+            {
+                Command lastCommand = history.Pop();
+                lastCommand.Unexecute();
+                lastCommand.Dispose();
             }
         }
 
@@ -153,30 +182,45 @@ namespace ООП_4
         private void GreenOption_Click(object sender, EventArgs e)
         {
             container.changeColor('G');
+            Command newcommand = new ColorCommand('G');
+            newcommand.Execute(container);
+            history.Push(newcommand);
             Colored = 'G';
         }
 
         private void BlackOption_Click(object sender, EventArgs e)
         {
             container.changeColor('B');
+            Command newcommand = new ColorCommand('B');
+            newcommand.Execute(container);
+            history.Push(newcommand);
             Colored = 'B';
         }
 
         private void PurpleOption_Click(object sender, EventArgs e)
         {
             container.changeColor('P');
+            Command newcommand = new ColorCommand('P');
+            newcommand.Execute(container);
+            history.Push(newcommand);
             Colored = 'P';
         }
 
         private void BrownOption_Click(object sender, EventArgs e)
         {
             container.changeColor('R');
+            Command newcommand = new ColorCommand('R');
+            newcommand.Execute(container);
+            history.Push(newcommand);
             Colored = 'R';
         }
 
         private void BlueOption_Click(object sender, EventArgs e)
         {
             container.changeColor('V');
+            Command newcommand = new ColorCommand('V');
+            newcommand.Execute(container);
+            history.Push(newcommand);
             Colored = 'V';
         }
 
@@ -199,6 +243,14 @@ namespace ООП_4
         private void unGroupButton_Click(object sender, EventArgs e)
         {
             container.unCompose();
+        }
+
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+            panel1.Width = this.Width - razWidth;
+            panel1.Height = this.Height - razHeight;
+            paintField.Width = this.Width - razWidth;
+            paintField.Height = this.Height - razHeight;
         }
     }
     

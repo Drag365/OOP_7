@@ -32,6 +32,17 @@ namespace ООП_4
                 shape.Draw();
         }
 
+        public List<Shape> returnSelected()
+        {
+            List<Shape> selShapes = new List<Shape>();
+            foreach (Shape shape in shapes) {
+                if (shape is Decorator)
+                {
+                    selShapes.Add(shape as Decorator);
+                }
+            }
+            return selShapes;
+        }
         public void Save()
         {
             try
@@ -119,26 +130,59 @@ namespace ООП_4
                 i++;
             }
         }
-        public bool isSelect(Point point)
+
+        virtual public bool CheckPosition(Point p)
         {
             int i = 0;
-            bool res = false;
+            for (; i < shapes.Count;)
+            {
+                if (shapes[i].checkPointPosition(p) == true)
+                {
+                    return true;
+                }
+                i++;
+            }
+            return false;
+
+        }
+        public void Select(Point point)
+        {
+            if (ctrlPressed == false)
+                unSelectAll();
+            int i = 0;
             for (; i < shapes.Count;)
             {
                 if (shapes[i] is Decorator == false && shapes[i].checkPointPosition(point) == true)
                 {
                     decorator = new Decorator(shapes[i]);
-                    shapes.Add(decorator);
-                    shapes.RemoveAt(i);
-                    res = true;
-                    if (selectMany == false)
-                        return res;
-                    continue;
+                    shapes.Insert(i, decorator);
+                    shapes.RemoveAt(i + 1);
+                    if (selectMany == true)
+                        continue;
                 }
                 i++;
             }
-            return res;
         }
+        //public bool isSelect(Point point)
+        //{
+        //    int i = 0;
+        //    bool res = false;
+        //    for (; i < shapes.Count;)
+        //    {
+        //        if (shapes[i] is Decorator == false && shapes[i].checkPointPosition(point) == true)
+        //        {
+        //            decorator = new Decorator(shapes[i]);
+        //            shapes.Insert(i, decorator);
+        //            shapes.RemoveAt(i + 1);
+        //            res = true;
+        //            if (selectMany == false)
+        //                return res;
+        //            continue;
+        //        }
+        //        i++;
+        //    }
+        //    return res;
+        //}
         public void delSelected()
         {
             int i = 0;
@@ -159,59 +203,38 @@ namespace ООП_4
                     shapes.RemoveAt(i);
             }
         }
-        virtual public void AddOrSelectShape(Shape shape)
-        {
-            if (ctrlPressed == false)
-                unSelectAll();
-            if (isSelect(shape.getPosition())) { return; }
-            if (ctrlPressed == false)
-            {
-                decorator = new Decorator(shape);
-                shapes.Add(decorator);
-                shapes.Remove(shape);
-            }
-        }
 
         public void Add(Shape shape)
         {
-                shapes.Add(shape);
-            
+            decorator = new Decorator(shape);
+            shapes.Add(decorator);
+            shapes.Remove(shape);
         }
 
-        public void Move(int x, int y, int width, int height)
+        public List<Shape> getShapes()
         {
+            return shapes;
+        }
+
+
+        override public void move(int x, int y)
+        {
+
+
 
             foreach (Shape shape in shapes)
             {
-                if (shape is Decorator == true)
-                {
-                    if (shape.canMove(x, y, width, height) == true)
-                        continue;
-                    else return;
-                }
-            }
-            foreach (Shape shape in shapes)
-            {
+
                 if (shape is Decorator == true)
                 {
                     shape.move(x, y);
                 }
             }
-            
+
         }
 
-        public void upSize(int s, int width, int height)
+        override public void upSize(int s)
         {
-
-            foreach (Shape shape in shapes)
-            {
-                if (shape is Decorator == true)
-                {
-                    if (shape.canMove(s, s, width, height) == true && shape.canMove(-s, -s, width, height) == true)
-                        continue;
-                    else return;
-                }
-            }
             foreach (Shape shape in shapes)
             {
                 if (shape is Decorator == true)
@@ -220,6 +243,7 @@ namespace ООП_4
                 }
             }
         }
+
         override public void changeColor(char Color)
         {
             foreach (Shape shape in shapes)

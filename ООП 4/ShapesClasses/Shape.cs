@@ -60,6 +60,10 @@ namespace Laba4OOP.src
             return R;
         }
 
+        virtual public char getColor()
+        {
+            return Colored;
+        }
         virtual public void move(int x, int y)
         {
             p.X += x;
